@@ -1,20 +1,19 @@
 import Axios from 'axios'
 
-const baseURL = 'https://api.github.com'
+// const baseURL = 'https://api.fxfi.io:8765'
+const baseURL = '/api'
 
 const axios = Axios.create({
   baseURL,
   timeout: 20000 // 请求超时 20s
 })
 
-// 前置拦截器（发起请求之前的拦截）
+// request interceptors
 axios.interceptors.request.use(
-  (response) => {
-    /**
-     * 根据你的项目实际情况来对 config 做处理
-     * 这里对 config 不做任何处理，直接返回
-     */
-    return response
+  (config: any) => {
+    // add important key here
+     config.headers['x-pubkey'] = 'rpubKBAbFZz7E75NHqmzyYwKabEm2f5WeMZ9AhgvaMpVRiapRAwbw9FYGuDySjyafJ7ZW7ea5kJBqqfhR1H4SmGKYxsQ6mdsUGnfAUeTutGM31Uw'
+    return config
   },
   (error) => {
     return Promise.reject(error)
