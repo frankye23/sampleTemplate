@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <filter-nav />
+  <!-- <div>
+    
     <div class="flex flex-col">
       <div class="">
         <div class="inline-block">
@@ -46,12 +48,12 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 <script lang="ts" setup>
   import { onMounted, reactive  } from 'vue'
   import { getAuctionList, getMarket } from '@/api/auction'
-
+  import FilterNav from './components/FilterNav.vue'
   const state = reactive({
     marketList:[]
   })
