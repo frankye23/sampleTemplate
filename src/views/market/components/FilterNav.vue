@@ -1,49 +1,82 @@
 <template>
-  <div class="container mx-auto">
-    <input class="hidden" type="radio" id="box0" checked name="boxlist" />
-    <input class="hidden" type="radio" id="box1" name="boxlist" />
-    <input class="hidden" type="radio" id="box2" name="boxlist" />
+  <div class="container">
+    <input type="radio" name="tab" id="opening" class="hidden" checked />
+    <input type="radio" name="tab" id="biding" class="hidden" />
+    <input type="radio" name="tab" id="revealing" class="hidden" />
 
-    <div class="flex justify-center mt-10">
-      <label class="mx-2 py-2 px-6 bg-gray-200 rounded-full cursor-pointer" for="box0">Box-0</label>
-      <label class="mx-2 py-2 px-6 bg-gray-200 rounded-full cursor-pointer" for="box1">Box-1</label>
-      <label class="mx-2 py-2 px-6 bg-gray-200 rounded-full cursor-pointer" for="box2">Box-2</label>
+    <div class="my-4 nav">
+      <label for="opening" @click="handleStatus('opening')">
+        <span class="py-2 px-5 rounded-full inline-block">即将开始</span>
+      </label>
+      <label for="biding" @click="handleStatus('bidding')">
+        <span class="py-2 px-5 rounded-full inline-block">竞价中</span>
+      </label>
+      <label for="revealing" @click="handleStatus('reveal')">
+        <span class="py-2 px-5 rounded-full inline-block">揭示中</span>
+      </label>
     </div>
 
-    <div class="hidden p-8 items-center shadow-lg rounded-lg box0">
-      <div class="w-3/5">
-        <h2 class="text-2xl font-bold">0.Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h2>
-        <p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci repudiandae labore totam. Ipsam, porro, inventore dicta exercitationem hic deserunt earum provident ea quod natus sunt ratione alias minima eaque.</p>
-        <button class="text-lg bg-black text-white rounded-full shadow py-2 px-5 mt-5 hover:scale-110 transform transition hover:bg-blue-600">Shop Now</button>
-      </div>
-      <div class="w-2/5">
-        <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-12-family-select-2020?wid=940&amp;hei=1112&amp;fmt=jpeg&amp;qlt=80&amp;.v=1604343709000" alt="" />
-      </div>
-    </div>
-
-    <div class="hidden p-8 items-center shadow-lg rounded-lg box1">
-      <div class="w-3/5">
-        <h2 class="text-2xl font-bold">1.Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h2>
-        <p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci repudiandae labore totam. Ipsam, porro, inventore dicta exercitationem hic deserunt earum provident ea quod natus sunt ratione alias minima eaque.</p>
-        <button class="text-lg bg-black text-white rounded-full shadow py-2 px-5 mt-5 hover:scale-110 transform transition hover:bg-blue-600">Shop Now</button>
-      </div>
-      <div class="w-2/5">
-        <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-12-family-select-2020?wid=940&amp;hei=1112&amp;fmt=jpeg&amp;qlt=80&amp;.v=1604343709000" alt="" />
+    <div class="rounded-xl hidden tab-opening">
+      <div class="w-full flex flex-col justify-center">
+        
       </div>
     </div>
 
-    <div class="hidden p-8 items-center shadow-lg rounded-lg box2">
-      <div class="w-3/5">
-        <h2 class="text-2xl font-bold">2.Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h2>
-        <p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci repudiandae labore totam. Ipsam, porro, inventore dicta exercitationem hic deserunt earum provident ea quod natus sunt ratione alias minima eaque.</p>
-        <button class="text-lg bg-black text-white rounded-full shadow py-2 px-5 mt-5 hover:scale-110 transform transition hover:bg-blue-600">Shop Now</button>
+    <div class="rounded-xl hidden tab-biding">
+      <div class="w-full flex flex-col justify-center">
+        
       </div>
-      <div class="w-2/5">
-        <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-12-family-select-2020?wid=940&amp;hei=1112&amp;fmt=jpeg&amp;qlt=80&amp;.v=1604343709000" alt="" />
-      </div>
+
     </div>
+
+    <div class="rounded-xl hidden tab-revealing">
+      <div class="w-full flex flex-col justify-center">
+        
+      </div>
+
   </div>
+</div>
 </template>
-<style>
 
+<script lang="ts" setup>
+  import { defineProps, defineEmits} from 'vue'
+  const emit = defineEmits(['clickChild'])
+//定义参数 已经选中的ITEMID
+const props = defineProps({
+  loadMarketList: {
+    type: Function,
+    default: Function,
+    required: true,
+  }
+})
+
+  const handleStatus = (data) => {
+    props.loadMarketList(data)
+  }
+</script>
+
+<style>
+#opening:checked ~ .tab-opening{
+  @apply flex;
+}
+
+#opening:checked ~ .nav label[for="opening"] span {
+  @apply bg-gray-200;
+}
+
+#biding:checked ~ .tab-biding {
+  @apply flex;
+}
+
+#biding:checked ~ .nav label[for="biding"] span {
+  @apply bg-gray-200;
+}
+
+#revealing:checked ~ .tab-revealing {
+  @apply flex;
+}
+
+#revealing:checked ~ .nav label[for="revealing"] span {
+  @apply bg-gray-200;
+}
 </style>

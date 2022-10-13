@@ -1,7 +1,6 @@
 <template>
-  <filter-nav />
-  <!-- <div>
-    
+  <filter-nav :loadMarketList="loadMarketList" />
+  <div>
     <div class="flex flex-col">
       <div class="">
         <div class="inline-block">
@@ -48,7 +47,7 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 <script lang="ts" setup>
   import { onMounted, reactive  } from 'vue'
@@ -57,11 +56,12 @@
   const state = reactive({
     marketList:[]
   })
-  async function loadMarketList() {
+  async function loadMarketList(data) {
+    console.log(data)
     const params = {
       limit:20,
       offset:1,
-      // status:'opening'
+      status:'closed'
     }
     const res = await getMarket(params)
     if(res) {
